@@ -4,44 +4,53 @@ $hotels = [
     [
         'name' => 'Hotel Belvedere',
         'description' => 'Hotel Belvedere Descrizione',
-        'parking' => 'true',
+        'parking' => true,
         'vote' => 4,
         'distance_to_center' => 10.4
     ],
     [
         'name' => 'Hotel Futuro',
         'description' => 'Hotel Futuro Descrizione',
-        'parking' =>'true',
+        'parking' =>true,
         'vote' => 2,
         'distance_to_center' => 2
     ],
     [
         'name' => 'Hotel Rivamare',
         'description' => 'Hotel Rivamare Descrizione',
-        'parking' => 'false',
+        'parking' => false,
         'vote' => 1,
         'distance_to_center' => 1
     ],
     [
         'name' => 'Hotel Bellavista',
         'description' => 'Hotel Bellavista Descrizione',
-        'parking' => 'false',
+        'parking' => false,
         'vote' => 5,
         'distance_to_center' => 5.5
     ],
     [
         'name' => 'Hotel Milano',
         'description' => 'Hotel Milano Descrizione',
-        'parking' => 'true',
+        'parking' => true,
         'vote' => 2,
         'distance_to_center' => 50
     ],
 
 ];
 if(isset($_GET['parking'])&& !empty($_GET['parking'])){
-    $temp=[];
+    $temp2=[];
     foreach($hotels as $item){
         if($item['parking']==$_GET['parking']){
+            $temp2[]=$item;
+        }
+    }
+    $hotels=$temp2;
+}
+if(isset($_GET['vote'])&& !empty($_GET['vote'])){
+    $temp=[];
+    foreach($hotels as $item){
+        if($item['vote']>=$_GET['vote']){
             $temp[]=$item;
         }
     }
@@ -62,9 +71,10 @@ if(isset($_GET['parking'])&& !empty($_GET['parking'])){
             <select name="parking" id="parking">
                 <option value="">seleziona</option>
                 <option value="true">parcheggi disponibili</option>
-                <option value="false">parcheggio non disponibile</option>
             </select>
-            <button type="submit">seleziona</button>
+            <label for="">inserire il voto minimo</label>
+        <input type="number" name="vote">
+        <button type="submit">invia</button>
         </form>
     </div>
     <div>
@@ -79,6 +89,9 @@ if(isset($_GET['parking'])&& !empty($_GET['parking'])){
             </div>
       <?php  } ?>
        
+    </div>
+    <div>
+  
     </div>
 </body>
 </html>
